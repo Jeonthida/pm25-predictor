@@ -1,20 +1,14 @@
-let pm25ChartInstance;
+let pm25ChartInstance; // เก็บ instance ของ Chart
 
 function renderChart() {
     const ctx = document.getElementById('pm25Chart').getContext('2d');
 
-    // ถ้าไม่มีข้อมูล dataset ให้แสดงข้อความแจ้งเตือน
-    if (dataset.length === 0) {
-        console.warn("❌ ไม่มีข้อมูลใน dataset - กราฟจะไม่แสดงผล");
-        return;
-    }
-
-    // ลบกราฟเดิมถ้ามีอยู่
+    // ✅ ลบกราฟเก่า ถ้ามีอยู่ก่อน
     if (pm25ChartInstance) {
         pm25ChartInstance.destroy();
     }
 
-    // สร้างกราฟใหม่
+    // ✅ สร้างกราฟใหม่
     pm25ChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
@@ -31,7 +25,8 @@ function renderChart() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: false, // ✅ ป้องกันไม่ให้กราฟขยายสูงเกินไป
+            aspectRatio: 2, // ✅ ควบคุมสัดส่วนของกราฟ
             scales: {
                 y: {
                     beginAtZero: true
@@ -40,5 +35,5 @@ function renderChart() {
         }
     });
 
-    console.log("✅ กราฟถูกอัปเดตแล้ว!");
+    console.log("✅ กราฟอัปเดตแล้ว!");
 }

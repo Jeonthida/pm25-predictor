@@ -41,3 +41,47 @@ canvas {
     margin-top: 20px;
     width: 100%;
 }
+#pm25Chart {
+    max-width: 100%;
+    max-height: 300px; /* ✅ จำกัดความสูงของกราฟ */
+    height: 300px;
+    display: block;
+    margin: auto;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* ✅ ให้ช่องห่างกันพอดี */
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.input-group input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.weight-input {
+    width: 80px; /* ✅ ให้ช่อง Weight กว้างพอดี */
+}
+
+.remove-input {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-input:hover {
+    background: #cc0000;
+}

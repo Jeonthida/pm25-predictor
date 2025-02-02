@@ -22,3 +22,53 @@ document.getElementById('predict-form').addEventListener('submit', function(even
     updateTable();
     renderChart();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const inputContainer = document.getElementById("dynamic-inputs");
+    const addInputBtn = document.getElementById("add-input");
+
+    let inputCount = 4; // ✅ เริ่มต้นที่ 4 Input
+
+    function addInputField() {
+        inputCount++;
+        const inputId = `input-${inputCount}`;
+        const weightId = `weight-${inputCount}`;
+        const nameId = `input-name-${inputCount}`;
+
+        // ✅ สร้างกล่องรวม Input และ Weight ให้อยู่ด้วยกัน
+        const inputGroup = document.createElement("div");
+        inputGroup.id = `input-group-${inputCount}`;
+        inputGroup.classList.add("input-group");
+        inputGroup.innerHTML = `
+            <input type="text" id="${nameId}" placeholder="ชื่อ Input ${inputCount}" class="input-name">
+            <input type="number" id="${inputId}" required placeholder="ค่า Input">
+            <input type="number" id="${weightId}" step="0.01" value="0.1" class="weight-input">
+            <button type="button" class="remove-input" data-id="${inputCount}">❌</button>
+        `;
+        inputContainer.appendChild(inputGroup);
+
+        // ✅ เมื่อเปลี่ยนชื่อ Input → ชื่อ Weight เปลี่ยนตาม
+        document.getElementById(nameId).addEventListener("input", function () {
+            document.getElementById(weightId).setAttribute("placeholder", `Weight ของ ${this.value.trim() || `Input ${inputCount}`}`);
+        });
+
+        // ✅ ให้ปุ่มลบลบ Input ทั้งเซ็ตออกไป
+        inputGroup.querySelector(".remove-input").addEventListener("click", function () {
+            removeInputField(inputCount);
+        });
+
+        console.log(`✅ เพิ่ม Input ${inputCount}`);
+    }
+
+    function removeInputField(id) {
+        const inputDiv = document.getElementById(`input-group-${id}`);
+        if (inputDiv) {
+            inputDiv.remove();
+            console.log(`❌ ลบ Input ${id}`);
+        }
+    }
+
+    addInputBtn.addEventListener("click", function () {
+        addInputField();
+    });
+});
